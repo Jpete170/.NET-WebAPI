@@ -1,12 +1,13 @@
-using dotenv.net; // import the package to use .env file
+using WebAPI.Models;
+using WebAPI.Database;
 
-DotEnv.Load(); //Load the environment Variables
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
-
+builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
+builder.Services.AddSingleton<DBServices>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
